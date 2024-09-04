@@ -8,7 +8,7 @@ import { Container } from '../../styles/GlobalStyles';
 import { AlunoContainer, ProfilePicture } from './styled';
 
 export default function Alunos() {
-  const [alunos, setAlunos] = useState();
+  const [alunos, setAlunos] = useState([]);
 
   useEffect(() => {
     async function getData() {
