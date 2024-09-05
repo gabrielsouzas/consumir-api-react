@@ -38,6 +38,9 @@ export default function Login(props) {
 
     if (formErrors) return;
 
+    /** Ao invés de colocar a interação com a API aqui, é usado o Redux para fazer isso
+     *  O método loginRequest faz a requisição de cadastro/alteração para a API no arquivo saga.js
+     */
     dispatch(actions.loginRequest({ email, password, prevPath, history }));
   };
 

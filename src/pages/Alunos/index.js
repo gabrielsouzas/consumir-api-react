@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { get } from 'lodash';
 import { Link } from 'react-router-dom';
 import { FaUserCircle, FaEdit, FaWindowClose } from 'react-icons/fa';
+import Loading from '../../components/Loading';
 
 import axios from '../../services/axios';
 import { Container } from '../../styles/GlobalStyles';
@@ -9,11 +10,14 @@ import { AlunoContainer, ProfilePicture } from './styled';
 
 export default function Alunos() {
   const [alunos, setAlunos] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function getData() {
+      setIsLoading(true);
       const response = await axios.get('/alunos');
       setAlunos(response.data);
+      setIsLoading(false);
     }
 
     getData();
@@ -21,6 +25,8 @@ export default function Alunos() {
 
   return (
     <Container>
+      <Loading isLoading={isLoading} />
+
       <h1>Alunos</h1>
 
       <AlunoContainer>

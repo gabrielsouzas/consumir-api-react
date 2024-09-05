@@ -5,11 +5,14 @@ import * as actions from './actions';
 import * as types from '../types';
 import axios from '../../../services/axios';
 
+/** O Redux precisa de funções geradoras em algumas ocasiões para funcionar corretamente */
+
 function* loginRequest({ payload }) {
   try {
     const response = yield call(axios.post, '/tokens', payload);
+    // informa ao Redux que a operação foi bem-sucedida
     yield put(actions.loginSuccess({ ...response.data }));
-    console.log(response);
+
     toast.success('Você fez login');
 
     /** Coloca no cabeçalho de todas as requisições o Bearer Token retornado */
@@ -17,7 +20,6 @@ function* loginRequest({ payload }) {
 
     // payload.history.push(payload.prevPath);
   } catch (e) {
-    console.log(payload.location);
     toast.error('Usuário ou senha inválidos.');
 
     yield put(actions.loginFailure());
@@ -36,6 +38,7 @@ function* registerRequest({ payload }) {
   const { id, nome, email, password, history } = payload;
 
   try {
+    /** Se existir o ID, a requisição será de update */
     if (id) {
       yield call(axios.put, '/users', {
         email,
