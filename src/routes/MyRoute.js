@@ -3,17 +3,17 @@ import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
-export default function MyRoute({ children, isClosed = false, ...rest }) {
+export default function MyRoute({ children, isClosed = false }) {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  return isClosed && !isLoggedIn ? (
-    <Navigate
+  return isClosed && !isLoggedIn ? <Navigate to="/login" /> : children;
+}
+
+/**
+ * <Navigate
       to={{ pathname: '/login', state: { prevPath: rest.location.pathname } }}
     />
-  ) : (
-    children
-  );
-}
+ */
 
 // Descontinuado pelo React
 // MyRoute.defaultProps = {

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { Container } from './styled';
 
-export default function Loading({ isLoading }) {
+export default function Loading({ isLoading = false }) {
   if (!isLoading) return <></>;
   return (
     <Container>
@@ -14,10 +14,11 @@ export default function Loading({ isLoading }) {
   );
 }
 
-Loading.defaultProps = {
-  isLoading: false,
-};
+// Loading.defaultProps = {
+//   isLoading: false,
+// };
 
 Loading.propTypes = {
+  // eslint-disable-next-line react/require-default-props
   isLoading: PropTypes.bool,
 };

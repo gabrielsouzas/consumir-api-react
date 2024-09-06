@@ -1,21 +1,27 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import { isEmail } from 'validator';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { isEmail } from 'validator';
 import { get } from 'lodash';
 
 import { Container } from '../../styles/GlobalStyles';
 import { Form } from './styled';
 import * as actions from '../../store/modules/auth/actions';
-
 import Loading from '../../components/Loading';
 
-export default function Login(props) {
+export default function Login() {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Substitui o history
+  const location = useLocation(); // Substitui o location
 
   /** Redireciona para a rota anterior caso exista, se não vai para a home (/) */
-  const prevPath = get(props, 'location.state.prevPath', '/');
-  const history = get(props, 'history');
+  const prevPath = get(location, 'state.prevPath', '/'); // Obtendo prevPath da nova maneira
+
+  /* VERSÂO REACT-ROUTER-DOM 5 */
+  /** Redireciona para a rota anterior caso exista, se não vai para a home (/) */
+  // const prevPath = get(props, 'location.state.prevPath', '/');
+  // const history = get(props, 'history');
 
   const isLoading = useSelector((state) => state.auth.isLoading);
 
@@ -41,7 +47,7 @@ export default function Login(props) {
     /** Ao invés de colocar a interação com a API aqui, é usado o Redux para fazer isso
      *  O método loginRequest faz a requisição de cadastro/alteração para a API no arquivo saga.js
      */
-    dispatch(actions.loginRequest({ email, password, prevPath, history }));
+    dispatch(actions.loginRequest({ email, password, prevPath, navigate }));
   };
 
   return (

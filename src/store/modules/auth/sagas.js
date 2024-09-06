@@ -18,7 +18,9 @@ function* loginRequest({ payload }) {
     /** Coloca no cabeçalho de todas as requisições o Bearer Token retornado */
     axios.defaults.headers.Authorization = `Bearer ${response.data.token}`;
 
-    // payload.history.push(payload.prevPath);
+    // Redireciona o usuário para a rota anterior ou home
+    const { navigate, prevPath } = payload;
+    navigate(prevPath); // Chama a função navigate diretamente com prevPath
   } catch (e) {
     toast.error('Usuário ou senha inválidos.');
 
@@ -35,7 +37,7 @@ function persistRehydrate({ payload }) {
 
 // eslint-disable-next-line consistent-return
 function* registerRequest({ payload }) {
-  const { id, nome, email, password, history } = payload;
+  const { id, nome, email, password, navigate } = payload;
 
   try {
     /** Se existir o ID, a requisição será de update */
@@ -55,7 +57,7 @@ function* registerRequest({ payload }) {
       });
       toast.success('Conta criada com sucesso!');
       yield put(actions.registerCreatedSuccess({ nome, email, password }));
-      history.push('/login');
+      navigate('/login');
     }
   } catch (e) {
     const errors = get(e, 'response.data.errors', []);
@@ -64,7 +66,7 @@ function* registerRequest({ payload }) {
     if (status === 401) {
       toast.error('Você precisa fazer login novamente.');
       yield put(actions.loginFailure());
-      return history.push('/login');
+      return navigate('/login');
     }
 
     if (errors.length > 0) {
