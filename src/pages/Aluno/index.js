@@ -136,6 +136,7 @@ export default function Aluno() {
         toast.error('Erro desconhecido');
       }
 
+      // Token inválido, dispara o loginFailure
       if (status === 401) dispatch(actions.loginFailure());
     }
   };
