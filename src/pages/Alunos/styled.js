@@ -16,6 +16,18 @@ export const AlunoContainer = styled.div`
   }
 `;
 
+export const Nome = styled.span`
+  width: 80px;
+  margin: 0 10px;
+  text-align: center;
+`;
+
+export const Email = styled.span`
+  width: 200px;
+  margin: 0 10px;
+  text-align: center;
+`;
+
 export const ProfilePicture = styled.div`
   img {
     width: 36px;

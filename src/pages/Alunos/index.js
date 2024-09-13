@@ -12,7 +12,13 @@ import Loading from '../../components/Loading';
 
 import axios from '../../services/axios';
 import { Container } from '../../styles/GlobalStyles';
-import { AlunoContainer, NovoAluno, ProfilePicture } from './styled';
+import {
+  AlunoContainer,
+  Email,
+  Nome,
+  NovoAluno,
+  ProfilePicture,
+} from './styled';
 
 export default function Alunos() {
   const [alunos, setAlunos] = useState([]);
@@ -76,14 +82,14 @@ export default function Alunos() {
           <div key={String(aluno.id)}>
             <ProfilePicture>
               {get(aluno, 'Fotos[0].url', false) ? (
-                <img src={aluno.Fotos[0].url} alt="" />
+                <img crossOrigin="anonymous" src={aluno.Fotos[0].url} alt="" />
               ) : (
                 <FaUserCircle size={24} />
               )}
             </ProfilePicture>
 
-            <span>{aluno.nome}</span>
-            <span>{aluno.email}</span>
+            <Nome>{aluno.nome}</Nome>
+            <Email>{aluno.email}</Email>
 
             <Link to={`/aluno/${aluno.id}/edit`}>
               <FaEdit size={16} />

@@ -75,7 +75,11 @@ export default function Fotos() {
 
       <Form>
         <label htmlFor="foto">
-          {foto ? <img src={foto} alt="Foto" /> : 'Selecionar'}
+          {foto ? (
+            <img crossOrigin="anonymous" src={foto} alt="Foto" />
+          ) : (
+            'Selecionar'
+          )}
           <input type="file" id="foto" onChange={handleChange} />
         </label>
       </Form>

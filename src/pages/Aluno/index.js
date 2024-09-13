@@ -149,7 +149,11 @@ export default function Aluno() {
 
       {id && (
         <ProfilePicture>
-          {foto ? <img src={foto} alt={nome} /> : <FaUserCircle size={180} />}
+          {foto ? (
+            <img crossOrigin="anonymous" src={foto} alt={nome} />
+          ) : (
+            <FaUserCircle size={180} />
+          )}
           <Link to={`/fotos/${id}`}>
             <FaEdit size={24} />
           </Link>

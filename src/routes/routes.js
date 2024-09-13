@@ -35,7 +35,7 @@ export default function RoutesConfig() {
         path="/aluno/"
         element={
           <MyRoute isClosed>
-            <Alunos />
+            <Aluno />
           </MyRoute>
         }
       />

@@ -25,23 +25,25 @@ export default function Header() {
 
   return (
     <Nav>
-      <Link to="/">
+      <Link to="/" title="Home">
         <FaHome size={24} />
       </Link>
-      <Link to="/register">
+      <Link to="/register" title="Criar/Editar Usuário">
         <FaUserAlt size={24} />
       </Link>
       {isLoggedIn ? (
-        <Link onClick={handleLogout} to="/logout">
+        <Link onClick={handleLogout} to="/logout" title="Fazer Logoff">
           <FaPowerOff size={24} />
         </Link>
       ) : (
-        <Link to="/login">
+        <Link to="/login" title="Fazer Login">
           <FaSignInAlt size={24} />
         </Link>
       )}
 
-      {isLoggedIn && <FaCircle size={24} color="green" />}
+      {isLoggedIn && (
+        <FaCircle size={24} color="green" title="Usuário Logado" />
+      )}
     </Nav>
   );
 }
